@@ -7,3 +7,8 @@ la carpeta etl-docker-proyect contiene los siguientes archivos:
 -feed.xml--------------Contiene la data para extraery cargar a la BD
 -Respuestas_Consultas_Problema.txt----Conntine los Slq para dar solución a las preguntas de negocio
 
+-Detalles de conexión a la base de datos
+-Host 'Localhost' 
+-Usuario BD 'root'
+-Password 'root123'
+-database 'realestatedb'
