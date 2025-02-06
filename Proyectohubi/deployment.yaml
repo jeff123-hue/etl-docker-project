@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: etl-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: etl-app
+  template:
+    metadata:
+      labels:
+        app: etl-app
+    spec:
+      containers:
+      - name: etl-container
+        image: your-docker-image-name  # Reemplaza con tu imagen Docker
+        ports:
+        - containerPort: 5000
+        env:
+        - name: MYSQL_HOST
+          value: "mysql-service"  # El nombre del servicio de MySQL
+        - name: MYSQL_USER
+          value: "root"
+        - name: MYSQL_PASSWORD
+          value: "root123"
+        - name: MYSQL_DATABASE
+          value: "realestatedb"
