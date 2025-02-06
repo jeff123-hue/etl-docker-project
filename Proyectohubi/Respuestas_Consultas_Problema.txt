@@ -1,0 +1,39 @@
+1.  ¿Cuántos usuarios hay registrados?
+SELECT COUNT(*) AS total_usuarios
+FROM usuarios;
+------------------------o------------------------------o------------------------
+
+2. ¿Cuántas propiedades hay por cada usuario?
+
+SELECT 
+    usuarios.correo_contacto, 
+    COUNT(propiedades.id) AS total_propiedades
+FROM 
+    usuarios
+LEFT JOIN 
+    propiedades
+ON 
+    usuarios.correo_contacto = propiedades.correo_contacto
+GROUP BY 
+    usuarios.correo_contacto;
+	
+-------------------------o-----------------------------o----------------------------	
+	
+3. ¿Cuántas casas y cuántos departamentos hay por estado?
+
+SELECT p.estado, 
+       SUM(CASE WHEN p.tipo_inmueble = 'Casa' THEN 1 ELSE 0 END) AS total_casas,
+       SUM(CASE WHEN p.tipo_inmueble = 'Departamento' THEN 1 ELSE 0 END) AS total_deptos
+FROM propiedades p
+GROUP BY p.estado;
+
+-------------------------0------------------------------0-----------------------------
+
+4.  ¿Tenemos códigos duplicados? ¿Por qué?
+
+SELECT p.codigo_proveedor, COUNT(*) AS cantidad
+FROM propiedades p
+GROUP BY p.codigo_proveedor
+HAVING COUNT(*) > 1;
+
+Razón: Los duplicados podrían deberse a datos mal limpiados o propiedades asociadas a múltiples usuarios/contactos.
